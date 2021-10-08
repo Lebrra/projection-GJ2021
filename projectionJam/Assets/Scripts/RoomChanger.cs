@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomChanger : MonoBehaviour
 {
     // For transitioning to different roomsides
-
+    // todo: add cool transitional delays
     public List<GameObject> roomSides;
     public int currentIndex = 0;
 
