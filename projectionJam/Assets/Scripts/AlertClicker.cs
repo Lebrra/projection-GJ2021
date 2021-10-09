@@ -9,8 +9,16 @@ public class AlertClicker : MonoBehaviour, IPointerClickHandler
 
     public string message;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
         AlertManager.instance?.DisplayNewAlert(message);
+    }
+
+    /// <summary>
+    /// Called via broadcast in RoomChanger. Tells object to reset from room change
+    /// </summary>
+    public virtual void ResetInteraction()
+    {
+        // on default no reset 
     }
 }

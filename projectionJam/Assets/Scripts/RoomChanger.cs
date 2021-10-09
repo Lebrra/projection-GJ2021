@@ -16,12 +16,16 @@ public class RoomChanger : MonoBehaviour
 
     public void IncrementIndex()
     {
+        roomSides[currentIndex].BroadcastMessage("ResetInteraction");
+
         currentIndex = (currentIndex + 1 ) % roomSides.Count;
         SetSide(currentIndex);
     }
 
     public void DecrementIndex()
     {
+        roomSides[currentIndex].BroadcastMessage("ResetInteraction");
+
         if (currentIndex == 0) currentIndex = roomSides.Count - 1;
         else currentIndex--;
         SetSide(currentIndex);
