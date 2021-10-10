@@ -9,9 +9,15 @@ public class InteractiveClicker : AlertClicker
     // Clicking on this object causes a sprite change and is no longer interactable. Changing scenes resets the object
 
     [Header("Interactive Properties")]
+    public bool moveOnInteract;
+    Vector2 initialPosition;
+    public Vector2 newPosition;
+
+    public bool spriteSwapOnInteract;
     Image myImage;
     Sprite initialSprite;
     public Sprite interactedSprite;
+
     [SerializeField]
     bool interacted = false;
 
@@ -19,6 +25,7 @@ public class InteractiveClicker : AlertClicker
     {
         myImage = GetComponent<Image>();
         initialSprite = myImage.sprite;
+        initialPosition = transform.position;
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -29,7 +36,12 @@ public class InteractiveClicker : AlertClicker
 
             interacted = true;
             myImage.raycastTarget = false;
-            myImage.sprite = interactedSprite;
+
+            if (spriteSwapOnInteract)
+                myImage.sprite = interactedSprite;
+
+            if (moveOnInteract)
+                transform.position = newPosition;
         }
     }
 
@@ -41,6 +53,8 @@ public class InteractiveClicker : AlertClicker
         Debug.Log("Reseting " + gameObject.name, gameObject);
         interacted = false;
         myImage.raycastTarget = true;
+
         myImage.sprite = initialSprite;
+        transform.position = initialPosition;
     }
 }
